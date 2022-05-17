@@ -1,4 +1,4 @@
-# 프로그라피 7th AOS 사전과제
+# AOS pre-test
 
 > ViewPager를 이용하여 Fragment 전환이 가능한 앱 개발
 </br>
