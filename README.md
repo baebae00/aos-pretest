@@ -1,61 +1,63 @@
+# 프로그라피 7th AOS 사전과제
 
-# Prography 7th Android Quest
+> ViewPager를 이용하여 Fragment 전환이 가능한 앱 개발
+</br>
 
-> 프로그라피 Android 전형의 비중은 면접(70%), 과제(30%) 입니다. 과제의 완성도보다 면접이 더 중요합니다.
+## 결과
 
-## 1. 개요
+<p align="center">
+<img src="https://user-images.githubusercontent.com/77660379/153544949-c06649a9-b4fd-49b8-b1f9-149fd1ea9497.gif" width="32%"/>
+<img src="https://user-images.githubusercontent.com/77660379/153545656-b7745619-11ed-4268-b889-5efbb1a16cb4.gif" width="32%"/>
+<img src="https://user-images.githubusercontent.com/77660379/153538759-50b20afc-c5c9-400d-96bb-0cf03ce6d26a.gif" width="32%"/>
+</p>
 
-프로그라피는 짧은 기간동안 멋진 서비스를 뚝딱 만들어내기 때문에 안드로이드 클라이언트 개발 능력이 굉장히 중요합니다. 프로그라피 활동에 필요한 클라이언트 개발 능력 확인하기 위해 사전과제를 진행하고 있습니다. 사전과제에서는 간단한 기획과 요구사항에 맞춰 앱을 구현할 수 있는 지를 확인합니다.
 
-더 궁금한 것이 있으시면 [해당 프로젝트 이슈](https://github.com/prography/prography-7th-android-quest/issues/new)로 남겨주세요! 늦어도 당일 이내에 답변을 남기도록 하겠습니다.
+## 수행정도
 
-해당 레포지토리를 fork 하여 개발 진행해주시면 됩니다.
+### 필수 과제
 
-## 2. 과제
+#### 기본 BottomNavigationView 화면 구현
+* `ViewPager2+BottomNavigationView` 활용 -> 영화 순위, 영화 목록 화면 구현
+* `영화 순위 화면`은 `별점(rt_score)`를 기준으로 `내림차순` 정렬
+* `영화 목록 화면`은 `제목(title)`을 알파벳 순(`A~Z`)으로 정렬
+* `즐겨찾기 화면`은 선택과제가 진행되지 않아 MainActivity에서 제거
+* 각 리스트의 아이템은 ‘RecyclerView’ 활용 -> `제목`, `감독`, `설명`, `점수`, `이미지`가 노출되도록 설정
 
-아래 설명을 읽고, 앱을 구현해주시기 바랍니다.
+## 회고
 
-**해당 Repository를 fork하여 진행합니다.**
+### 선택 과제
 
-### a. 주제
+#### 즐겨찾기 기능
+* `즐겨찾기` Fragment, layout 완성 후 MainActivity와 연결했으나 Room을 활용한 로컬 데이터베이스 저장 및 즐겨찾기 기능은 구현하지 못했음
 
-ViewPager를 이용하여 Frament 전환이 가능한 앱 개발
+* Room Components 룸 구성 요소 이해하고 사전과제 기한에 구애받지 않고 추후 구현해볼 것
+* ‘Entity’ : Database 안에 있는 테이블을 Java나 Kotlin 클래스로 나타낸 것이다. 데이터 모델 클래스라고 볼 수 있다. 
+* ‘DAO’ : Database Access Object, 데이터베이스에 접근해서 실질적으로 insert, delete 등을 수행하는 메소드를 포함한다.
+* ‘Database’ : database holder를 포함하며, 앱에 영구 저장되는 데이터와 기본 연결을 위한 주 액세스 지점이다. `RoomDatabase’를 extend 하는 추상 클래스여야 하며, 테이블과 버전을 정의하는 곳이다.
 
-### b. 필수 과제
+#### 상세페이지 기능
+* `상세페이지` Activity, layout 완성했으나 리사이클러뷰 내부 아이템을 눌렀을 때 상세페이지로 이동하도록 구현하지 못했음
+* RecyclerView가 사용되는 Fragment에서 Click 이벤트 적용하는 과정 이해하고 사전과제 기한에 구애받지 않고 추후 구현해볼 것
 
-#### 1. 기본 BottomNavigationView 화면 구현
-* ViewPager2와 BottomNavigationView를 이용하여 화면 3개를 구현(각 화면은 `왼쪽 화면`, `가운데 화면`, `오른쪽 화면`으로 명칭)
-* 제공되는 링크 ([https://ghibliapi.herokuapp.com/films](https://ghibliapi.herokuapp.com/films))를 사용하여, 영화목록 구현
-* `왼쪽 화면`은 받아온 값을 점수(`rt_score`)를 기준으로 내림차순으로 정렬하여 영화 순위 리스트 구현
-* `가운데 화면`은 받아온 값을 이름(`title` 혹은 `original_title_remanized` 사용) 알파벳 순으로 영화 목록 리스트를 구현
-* `오른쪽 화면`은 선택과제로, 즐겨찾기 선택과제가 진행되지 않았다면 BottomNavigation의 Item 을 두개만 노출되도록 수정하여 구현
-* 각 리스트의 아이템은 RecyclerView를 활용하여 제목, 감독, 설명, 점수, (이미지)가 노출되도록 설정하여야 함
+## Tech stack & Open-source libraries
+### Architecture
+- `MVVM Architecture`
+- `Koin` 을 이용한 `Dependency Injection`
 
-### c.선택 과제
+### AAC Libraries
+ - `ViewModel`
+ - `DataBinding`
+ - `ViewBinding`
+ - `LiveData`
 
-1. 즐겨찾기 기능
-   * `왼쪽 화면`과 `가운데 화면`에 있는 리스트에 즐겨찾기 추가 기능을 구현
-   * 즐겨찾기 된 영화는 리스트 우측 상단에 즐겨찾기 표시가 노출되어야 함. ( 즐겨찾기 상태 확인 및 즐겨찾기 설정 기능 구현 )
-   * 즐겨찾기 된 영화는 `오른쪽 화면`의 리스트에 추가되어야 함.
-      * Room을 활용하여 로컬 데이터베이스에 저장되어, 재시작 후에도 즐겨찾기에 남아있어야 함.
-      * `오른쪽 화면`에서 즐겨찾기 해제 버튼 클릭시 리스트에서 사라지며, `왼쪽 화면`과 `오른쪽 화면`에서도 즐겨찾기가 해제되어야 함.
-2. 상세페이지 기능
-    * 아이템을 눌렀을 때 `상세 페이지`로 이동하도록 구현.
-    * `상세 페이지`에는 제목, 이미지(URL이 아닌 이미지뷰), 설명, 각본, 감독, 출시일자, 러닝타임, 점수, 현재 즐겨찾기 여부의 정보가 노출되어야 함.
-        * 상세페이지에 들어가는 데이터는 아이템의 ID를 가지고 링크 호출 방법을 참고하여 데이터를 호출.
-      (예: [https://ghibliapi.herokuapp.com/films?id=2baf70d1-42bb-4437-b551-e5fed5a87abe](https://ghibliapi.herokuapp.com/films?id=2baf70d1-42bb-4437-b551-e5fed5a87abe) )
-    * (선택) 즐겨찾기 기능이 상세페이지에도 적용되어야 하고, 현재 즐겨찾기 상태와, 즐겨찾기 설정 기능이 구현되어 있어야 함.
+### REST API 통신
+ - `Retrofit2`
+ - `OkHttp3`
+ - `Gson`
 
-## 3. 제약 사항
-
-- 사용언어는 반드시 Java 혹은 Kotlin으로 개발되어야 합니다.
-- 네트워크 통신은 반드시 Retrofit2을 사용해야합니다.
-- RecyclerView를 사용할 때 위아래 스크롤이 가능하도록 설정해주셔야합니다.
-
-## 4. 우대 사항
-
-- MVVM, MVP와 같은 디자인 패턴 적용
-- RxJava 혹은 Kotlin Coroutine 사용
-- Dependency Injection 적용
-- Android Clean Architecture 적용
-- ViewBinding과 DataBinding 적용
+### Other Libraries
+ - `ViewPager2`
+ - `Fragment`
+ - `Coroutine`
+ - `RecyclerView` + `ListAdapter`
+ - `BottomNavigation`
